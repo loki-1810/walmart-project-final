@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Circular Cart</title>
+  <link rel="stylesheet" href="circular-cart.css" />
+</head>
+<body>  
+
+  <header>
+    <div class="logo">Walmart</div>
+    <nav>
+      <button onclick="location.href='login.html'">Login</button>
+    </nav>
+  </header> 
+
+  <!-- 🧩 Main card container -->
+  <main class="main" id="items-container">
+    <!-- Cards will be dynamically added here -->
+  </main>
+
+  <!-- 🔁 JavaScript to fetch items from backend -->
+  <script>
+    fetch('/get-items') // Flask route must return a JSON array of items
+      .then(res => res.json())
+      .then(items => {
+        const container = document.getElementById('items-container');
+        container.innerHTML = '';
+
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="${item.image_url}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p>Purchased on: ${item.purchase_date}</p>
+            <button class="shop-btn" onclick="location.href='recycle-form.html?id=${item._id}'">Recycle</button>
+          `;
+          container.appendChild(card);
+        });
+      });
+  </script>
+
+</body>
+</html>
