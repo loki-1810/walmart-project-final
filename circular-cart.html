@@ -1,27 +1,47 @@
+<!-- circular-cart.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Your Circular Cart</title>
+  <title>Circular Cart</title>
   <link rel="stylesheet" href="circular-cart.css" />
 </head>
 <body>
 
-<h1>Your Circular Cart</h1>
+<header>
+  <div class="logo">Walmart</div>
+  <nav>
+    <button onclick="location.href='index.html'">Home</button>
+    <button onclick="location.href='login.html'">Login</button>
+  </nav>
+</header>
 
-<div class="item">
-  <img src="https://via.placeholder.com/80" alt="Steel Bottle" />
-  <strong>Steel Bottle</strong><br/>
-  Purchased on: May 15<br/>
-  <button class="recycle-btn" onclick="location.href='recycle-form.html'">Recycle</button>
+<div class="main">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1606813902914-3e2c4bb2de5d?auto=format&fit=crop&w=600&q=80" alt="Dress">
+    <h3>Stylish Summer Dress</h3>
+    <button onclick="startRecycle('Stylish Summer Dress')">Recycle</button>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0642?auto=format&fit=crop&w=600&q=80" alt="Shoes">
+    <h3>Men’s Sneakers</h3>
+    <button onclick="startRecycle('Men’s Sneakers')">Recycle</button>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1619983081563-430f6360270f?auto=format&fit=crop&w=600&q=80" alt="Kitchen">
+    <h3>Kitchen Essentials</h3>
+    <button onclick="startRecycle('Kitchen Essentials')">Recycle</button>
+  </div>
 </div>
 
-<div class="item">
-  <img src="https://via.placeholder.com/80" alt="Old Bluetooth Speaker" />
-  <strong>Old Bluetooth Speaker</strong><br/>
-  Purchased on: March 20<br/>
-  <button class="recycle-btn" onclick="location.href='recycle-form.html'">Recycle</button>
-</div>
+<script>
+  function startRecycle(productName) {
+    localStorage.setItem("selectedProduct", productName);
+    window.location.href = "recycle-form.html";
+  }
+</script>
 
 </body>
 </html>

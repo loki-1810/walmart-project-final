@@ -1,0 +1,28 @@
+<!-- recycle-success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recycle Success</title>
+  <link rel="stylesheet" href="circular-cart.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">Walmart</div>
+  <nav>
+    <button onclick="location.href='index.html'">Home</button>
+    <button onclick="location.href='circular-cart.html'">Back to Cart</button>
+  </nav>
+</header>
+
+<div class="qr-result">
+  <h2>Thank You!</h2>
+  <p>Your recycle request was submitted.</p>
+  <p>Scan this QR code at drop-off:</p>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CircularCart" alt="QR">
+  <p><strong>Green Credits Earned: +10</strong></p>
+</div>
+
+</body>
+</html>

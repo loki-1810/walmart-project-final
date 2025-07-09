@@ -1,37 +1,49 @@
+<!-- recycle-form.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Recycle Form</title>
-  <link rel="stylesheet" href="recycle-form.css" />
+  <link rel="stylesheet" href="circular-cart.css" />
 </head>
 <body>
 
+<header>
+  <div class="logo">Walmart</div>
+  <nav>
+    <button onclick="location.href='index.html'">Home</button>
+  </nav>
+</header>
+
 <div class="form-box">
   <h2>Recycle Product</h2>
-  
-  <form id="recycleForm">
-    <label for="quality">Select Product Quality</label>
-    <select id="quality" required>
-      <option value="">-- Select --</option>
-      <option value="Good">Good</option>
-      <option value="Average">Average</option>
+  <form onsubmit="handleSubmit(event)">
+    <label>Product:</label>
+    <input type="text" id="selectedProduct" readonly />
+
+    <label>Reason:</label>
+    <select required>
+      <option value="">--Choose Reason--</option>
       <option value="Damaged">Damaged</option>
+      <option value="Not needed">Not needed</option>
+      <option value="Wrong item">Wrong item</option>
+      <option value="Want to recycle">Want to recycle</option>
     </select>
 
-    <label for="photo">Upload Product Photo</label>
-    <input type="file" id="photo" accept="image/*" required>
+    <label>Upload Product Photo:</label>
+    <input type="file" accept="image/*" required />
 
-    <button type="submit">Submit for Recycling</button>
+    <button type="submit">Submit</button>
   </form>
 </div>
 
 <script>
-  document.getElementById('recycleForm').addEventListener('submit', function(e) {
+  document.getElementById("selectedProduct").value = localStorage.getItem("selectedProduct");
+
+  function handleSubmit(e) {
     e.preventDefault();
-    alert("Submitted successfully!");
-    window.location.href = 'qr-confirm.html';
-  });
+    window.location.href = "recycle-success.html";
+  }
 </script>
 
 </body>
