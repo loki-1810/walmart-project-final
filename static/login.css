@@ -5,6 +5,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  margin: 0;
 }
 
 .login-box {
@@ -13,6 +14,12 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   width: 300px;
+}
+
+.login-box h2 {
+  margin-top: 0;
+  text-align: center;
+  color: #0071dc;
 }
 
 input {
@@ -33,4 +40,9 @@ button {
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #005bb5;
 }
