@@ -1,72 +1,31 @@
-from flask import Flask, render_template, request, redirect, jsonify, session, url_for
-from flask_pymongo import PyMongo
-from werkzeug.security import generate_password_hash, check_password_hash
-from bson import ObjectId
-import os
+from flask import Flask, render_template
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "your_secret_key")
 
-# MongoDB config
-app.config["MONGO_URI"] = "mongodb://localhost:27017/walmartdb"
-mongo = PyMongo(app)
-
-# --- ROUTES ---
-
+# Home Page
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+# Login Page
+@app.route('/login')
 def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        user = mongo.db.users.find_one({'email': email})
-        if user and check_password_hash(user['password'], password):
-            session['user_id'] = str(user['_id'])
-            return redirect(url_for('circular_cart'))
-        return "Invalid credentials", 401
     return render_template('login.html')
 
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('login'))
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        if mongo.db.users.find_one({'email': email}):
-            return "User already exists", 400
-        hashed_pw = generate_password_hash(password)
-        mongo.db.users.insert_one({'email': email, 'password': hashed_pw})
-        return redirect(url_for('login'))
-    return "Register page not implemented"
-
+# Circular Cart Page
 @app.route('/circular-cart')
 def circular_cart():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-    return render_template('circular-cart.html')
+    return render_template('circular_cart.html')
 
-@app.route('/get-items')
-def get_items():
-    if 'user_id' not in session:
-        return jsonify([]), 401
-    user_id = session['user_id']
-    items = list(mongo.db.items.find({'user_id': user_id}))
-    for item in items:
-        item['_id'] = str(item['_id'])
-    return jsonify(items)
-
-@app.route('/recycle-form.html')
+# Recycle Form Page
+@app.route('/recycle-form')
 def recycle_form():
-    return render_template('recycle-form.html')
+    return render_template('recycle_form.html')
 
-# Add more routes as needed for recycling, etc.
+# Cart Page
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)
